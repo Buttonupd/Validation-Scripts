@@ -1,12 +1,12 @@
 
 
-// Val Telephone2
+
 function validateTelephone2(executionContext) {
 
-   var formContext = executionContext ? executionContext.getFormContext() : Xrm.Page; // get formContext
-   
-   var pattern = /[^0-9,\+']/ig;
-   var fieldName = 'telephone2';
+   var formContext = executionContext ? executionContext.getFormContext() : Xrm.Page;
+
+   var pattern = /[^0-9,\+]/ig;
+   var fieldName = '';
    var currentValue = formContext.getAttribute(fieldName).getValue(); 
    var currentValueLength = currentValue.length;
    if (pattern.test(currentValue) || currentValueLength < 13 ) {
@@ -17,14 +17,12 @@ function validateTelephone2(executionContext) {
 
   }
 
- //Val Telephone1
- 
   function validateTelephone1(executionContext) {
 
-    var formContext = executionContext ? executionContext.getFormContext() : Xrm.Page; // get formContext
+    var formContext = executionContext ? executionContext.getFormContext() : Xrm.Page; 
     
     var pattern = /[^0-9,\+]/ig;
-    var fieldName = 'telephone1';
+    var fieldName = '';
     var currentValue = formContext.getAttribute(fieldName).getValue(); 
     var currentValueLength = currentValue.length;
     if (pattern.test(currentValue) || currentValueLength < 13) {
@@ -35,13 +33,12 @@ function validateTelephone2(executionContext) {
  
    }
  
-   // Val Telephone 3
    function validateTelephone3(executionContext) {
 
-    var formContext = executionContext ? executionContext.getFormContext() : Xrm.Page; // get formContext
+    var formContext = executionContext ? executionContext.getFormContext() : Xrm.Page; 
     
     var pattern = /[^0-9,\+]/ig;
-    var fieldName = 'telephone3';
+    var fieldName = '';
     var currentValue = formContext.getAttribute(fieldName).getValue(); 
     var currentValueLength = currentValue.length;
     if (pattern.test(currentValue) || currentValueLength < 13) {
@@ -52,13 +49,14 @@ function validateTelephone2(executionContext) {
  
    }
 
-   // Val KRA PIN
+
    function validateKRAPIN(executionContext) {
 
     var formContext = executionContext ? executionContext.getFormContext() : Xrm.Page; // get formContext
     
+    // Allowed chars in KRA field . Numbers, Caps & Small Letters
     var pattern = /[^0-9,\A-Z,\a-z]/ig;
-    var fieldName = 'ecl_krapin';
+    var fieldName = '';
     var currentValue = formContext.getAttribute(fieldName).getValue(); 
     var currentValueLength = currentValue.length;
     if (pattern.test(currentValue) || currentValueLength < 11 || currentValueLength > 11) {
@@ -69,17 +67,12 @@ function validateTelephone2(executionContext) {
  
    }
 
-   //KRA A010245821H
-   var txt = "A010245821H"
-   var len = txt.length
-   console.log(len)
-
 
    //Validate Date Of Birth
 
    function onChangeDOB(executionContext){
     var formContext = executionContext ? executionContext.getFormContext() : Xrm.Page; 
-     var fieldName = 'ecl_dateofbirth';
+     var fieldName = '';
      var birthDateValue = formContext.getAttribute(fieldName).getValue();
      var today = new Date();
      var validMinDate = new Date(
@@ -98,3 +91,31 @@ function validateTelephone2(executionContext) {
        formContext.getControl(fieldName).clearNotification();
      }
    }
+
+   // Name field
+   function nameField(executionContext) {
+   var formContext = executionContext ? executionContext.getFormContext() : Xrm.Page; 
+   var pattern = /[^A-Z,\a-z]/ig;
+   var fieldName = '';
+   var currentValue = formContext.getAttribute(fieldName).getValue(); 
+   if (pattern.test(currentValue)) {
+     formContext.getControl(fieldName).setNotification('The field name contains letters only . ');
+   } else {
+     formContext.getControl(fieldName).clearNotification();
+   }
+
+  }
+
+  function memberNo(executionContext) {
+
+   var formContext = executionContext ? executionContext.getFormContext() : Xrm.Page; 
+   var pattern = /[^0-9]/ig;
+   var fieldName = '';
+   var currentValue = formContext.getAttribute(fieldName).getValue(); 
+   if (pattern.test(currentValue)) {
+     formContext.getControl(fieldName).setNotification('Member number contains numerical characters only');
+   } else {
+     formContext.getControl(fieldName).clearNotification();
+   }
+
+  }
